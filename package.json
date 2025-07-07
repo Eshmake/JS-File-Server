@@ -1,0 +1,34 @@
+{
+  "name": "notetaker",
+  "version": "1.0.0",
+  "main": "server.js",
+  "bin": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^28.3.3",
+    "electron-packager": "^17.1.2"
+  },
+  "pkg": {
+    "assets": [
+      "index.html",
+      "styles.css"
+    ],
+    "targets": [
+      "node18-macos-x64"
+    ],
+    "scripts": [
+      "node_modules/open/**"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "mime": "^2.6.0",
+    "pkg": "^5.8.1"
+  }
+}

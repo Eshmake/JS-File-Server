@@ -1,0 +1,70 @@
+
+<!--doctype set as html-->
+<!doctype html>
+
+<!--html tag declared-->
+<html lang="en">
+    
+    <!--header tag declared-->
+    <head>
+        <!--header section declares utf-8 encoding-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--header section declares browser title-->
+        <title>Notetaker</title>
+        
+        <link rel="stylesheet" href="styles.css">
+        <script src="https://kit.fontawesome.com/4ecf1b89f1.js" crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap" rel="stylesheet">
+       
+    </head>
+    
+    <!--body section tag declared-->
+    <body>
+    
+        <!--header and para. tags declared-->
+        <div class="text">
+            <h1>Notetaker Website</h1>
+            <p class="webDesc">This website keeps a file called notes.txt for you.</p>
+
+            <h2>How To Use:</h2>
+       
+            <p>1. To create a notes.txt file, type in the box and press the "Save" button.</p>
+            <p>2. You can edit the file and save it again.</p>
+            <p>3. Next time you access this page, it will load the notes.txt you saved last time.</p>
+        </div>
+
+        <!--text area w/ button declared-->
+        <textarea name="notesText" id="notes" rows="20" cols="50"></textarea><br>
+        <button type="submit">Save</button>
+        
+        <!--JS script defined, which retrieves notes.txt data from server, and saves edited text back to server upon button press-->
+        <script>
+
+            //text area accessed via DOM
+            let text = document.querySelector("textarea");
+
+            //server accessed via resource path
+            fetch("http://localhost:8000/notes.txt")
+            //response object used to retrieve text body from file server
+            .then(resp => resp.text())
+            //text area content set to retrieved text body
+            .then(data => {text.value = data});
+
+            //button accessed via DOM
+            let button = document.querySelector("button");
+
+            /*event listener added for button, which stores 
+            text area data to server body upon click*/
+            button.addEventListener("click", () => {
+                fetch("http://localhost:8000/notes.txt", {method: "PUT", headers: {"Content-Type": "text/plain"}, body: text.value});
+            });
+
+            //end tags
+        </script>
+        
+    </body>
+</html>
